@@ -149,8 +149,14 @@
                     //      The event object
                     // _chosen: Object {chosen:Chosen}
                     //      Contains the current instance of Chosen class
-                    var lis = $(chosen.container).find('.chosen-drop ul li:not(:has(img))')
-                    var options = $(chosen.form_field).find('optgroup, option');
+                    /****************************************************/
+                    /**///The reason I found this change necessary  was because my optgroups kept getting images from
+                    /**///surrounding options prepended inside of them after line 172 executed resulting in broken ugly drop downs
+                    /**///I don't thin optgroups should have images so they can stand out from options that do have images
+                    /**///find chosen-drop ul li.group-option fits this case better than find chosen-drop ul li not image
+                    var lis = $(chosen.container).find('.chosen-drop ul li.group-option'); //find('.chosen-drop ul li:not(:has(img)))
+                    /**///removed optgroup from this in order to match the arrays correctly works much better now
+                    var options = $(chosen.form_field).find('option'); //('optgroup, option');
                     
                     for(var i = 0; i < lis.length; i++){
                         var li = lis[i];
